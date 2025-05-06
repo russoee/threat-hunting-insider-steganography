@@ -144,6 +144,6 @@ DeviceFileEvents
 
 ---
 
-## ✅ Outcome
+## Outcome
 This investigation led to a full reconstruction of the attacker’s path, exposing the insider’s complete method of access, obfuscation, and exfiltration of sensitive data. All key artifacts were captured and documented to support remediation and prevention in future incidents.
 
