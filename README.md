@@ -1,12 +1,12 @@
-# 🕵️ Threat Hunting Case Study: Insider Exfiltration via Steganography
+# Threat Hunting Case Study: Insider Exfiltration via Steganography
 
 This project documents a full threat hunting investigation using **Microsoft Defender for Endpoint** and **Kusto Query Language (KQL)** to uncover a simulated insider threat. It traces the attacker's actions from accessing sensitive documents to hiding them within image files and staging them for exfiltration via removable media.
 
-> 📁 Full case write-up: [case-study.md](./case-study.md)
+> Full case write-up: [case-study.md](./case-study.md)
 
 ---
 
-## 📌 Scenario Summary
+## Scenario Summary
 
 An internal user (`bmontgomery`) accessed confidential PDF and Excel documents, used **`steghide.exe`** to embed them into `.bmp` images, and then compressed the images into an encrypted archive using **`7z.exe`**. The archive was staged and later renamed for stealth.
 
@@ -14,7 +14,7 @@ Through endpoint telemetry and file hash correlation, this case study reconstruc
 
 ---
 
-## 🧠 Tools & Techniques
+## Tools & Techniques
 
 * **Microsoft Defender for Endpoint**
 * **Kusto Query Language (KQL)**
@@ -29,7 +29,7 @@ Through endpoint telemetry and file hash correlation, this case study reconstruc
 
 ---
 
-## ✅ Skills Demonstrated
+## Skills Demonstrated
 
 * Threat hunting methodology
 * Endpoint visibility and investigative workflows
