@@ -1,0 +1,58 @@
+// Step 1: Identify Accessed Corporate Documents by User
+DeviceFileEvents
+| where DeviceName == "corp-ny-it-0334"
+| where InitiatingProcessAccountName == "bmontgomery"
+| where FileName endswith ".pdf" or FileName endswith ".docx" or FileName endswith ".xlsx"
+| order by Timestamp asc
+| project Timestamp, FileName, FolderPath, SHA256, MD5
+
+// Step 2: Track Document Hashes Across Devices
+DeviceFileEvents
+| where SHA256 in (
+    "ec727a15bf51e027b9a1bbf097cfa9d57e46aa159bfa37f68dca5e3c5df5af3d",
+    "657c41d860ce131c3a1d397a5fcd405d4e71b404ce10b775a1b8359763551c3b",
+    "3d21356bcf39032d2bb6e772bdfd131f754bb66d8b8f404e4de0ee4a8f6142c8"
+)
+| order by Timestamp asc
+| project Timestamp, DeviceName, InitiatingProcessAccountName, FileName, FolderPath, SHA256
+
+// Step 3: Identify Obfuscated Filenames
+DeviceEvents
+| where FileName in ("bryce-homework-fall-2024.pdf", "Amazon-Order-123456789-Invoice.pdf", "temp__2bbf98cf.pdf")
+| order by Timestamp desc
+
+// Step 4: Discover Steganography Tool Usage
+DeviceProcessEvents
+| where ProcessCommandLine contains "steghide.exe"
+| project Timestamp, DeviceName, ProcessCommandLine, InitiatingProcessFileName, FolderPath
+| order by Timestamp desc
+
+// Step 5: Review BMP Files Possibly Used in Steganography
+DeviceFileEvents
+| where FileName in ("suzie-and-bob.bmp", "bryce-and-kid.bmp", "bryce-fishing.bmp")
+| project Timestamp, DeviceName, ActionType, FileName, SHA256, MD5, InitiatingProcessFileName, InitiatingProcessSHA256
+| order by Timestamp desc
+
+// Step 6: Identify Compression of Image Files Using 7-Zip
+DeviceProcessEvents
+| where DeviceName == "lobby-fl2-ae5fc"
+| where ProcessCommandLine has_any ("bryce-and-kid.bmp", "bryce-fishing.bmp", "suzie-and-bob.bmp")
+| where FileName == "7z.exe"
+| project Timestamp, DeviceName, FileName, ProcessCommandLine
+| order by Timestamp desc
+
+// Step 7: Locate Archive File Creation
+DeviceFileEvents
+| where DeviceName == "lobby-fl2-ae5fc"
+| where FileName == "secure_files.zip"
+| order by Timestamp desc
+
+// Step 8: Track Archive File by Hash
+DeviceFileEvents
+| where SHA256 == "07236346de27a608698b9e1ffef07b1987aa7fe8473aac171e66048ff322e2d6"
+| order by Timestamp desc
+
+// Step 9: Confirm Final File Rename Event
+DeviceFileEvents
+| where FileName == "marketing_misc.zip"
+| order by Timestamp desc
