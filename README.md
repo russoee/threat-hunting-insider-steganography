@@ -37,4 +37,6 @@ Through endpoint telemetry and file hash correlation, this case study reconstruc
 * Real-world reporting and documentation
 
 
+
+
 **This project is for educational demonstration purposes and simulates a realistic insider threat workflow.**
