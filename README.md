@@ -36,19 +36,5 @@ Through endpoint telemetry and file hash correlation, this case study reconstruc
 * KQL query creation and refinement
 * Real-world reporting and documentation
 
----
-
-## 📂 Repository Contents
-
-```
-threat-hunting-insider-steganography/
-├── README.md                 <-- This file
-├── case-study.md            <-- Full investigation report
-├── queries/
-│   └── all_queries.kql      <-- All KQL queries used
-├── screenshots/             <-- Visual evidence from Defender EDR
-│   ├── [Images by investigation step]
-├── hashes.txt               <-- Documented file hashes involved
-```
 
 **This project is for educational demonstration purposes and simulates a realistic insider threat workflow.**
