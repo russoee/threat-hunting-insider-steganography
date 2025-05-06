@@ -26,6 +26,8 @@ DeviceFileEvents
 ```
 ➡️ Revealed sensitive documents accessed by the user.
 
+![Document Access by User bmontgomery](screenshots/document_access_by_bmontgomery.png)
+
 ### Step 2: Track Files via Hash Across Devices
 ```kql
 DeviceFileEvents
@@ -38,6 +40,8 @@ DeviceFileEvents
 | project Timestamp, DeviceName, InitiatingProcessAccountName, FileName, FolderPath, SHA256
 ```
 ➡️ Found the same files accessed under new names on another device.
+
+![Files Renamed Across Devices](screenshots/file_rename_obfuscation_cross_device.png)
 
 ### Step 3: Pivot to File Names (Obfuscated)
 ```kql
@@ -56,6 +60,9 @@ DeviceProcessEvents
 ```
 ➡️ Identified suspicious processes interacting with BMP files.
 
+![Steghide and 7-Zip Processes Created](screenshots/steghide_and_7zip_processes_created.png)
+![Steghide Embed Commands Executed](screenshots/steghide_embed_commands_executed.png)
+
 ### Step 5: Review BMP Image Files Used
 ```kql
 DeviceFileEvents
@@ -64,6 +71,8 @@ DeviceFileEvents
 | order by Timestamp desc
 ```
 ➡️ Confirmed files used for steganographic embedding.
+
+![Creation of BMP Files Used for Steganography](screenshots/bmp_creation_steganography_processes.png)
 
 ### Step 6: Find Compression Activity (7-Zip)
 ```kql
@@ -76,6 +85,8 @@ DeviceProcessEvents
 ```
 ➡️ Revealed creation of archive: `secure_files.zip`
 
+![7-Zip Archive Creation for Stego Images](screenshots/7zip_secure_files_zip_creation.png)
+
 ### Step 7: Track ZIP File Movement
 ```kql
 DeviceFileEvents
@@ -85,6 +96,8 @@ DeviceFileEvents
 ```
 ➡️ Located and logged the ZIP file creation.
 
+![Secure Files ZIP Created and Transferred](screenshots/secure_files_zip_creation_and_transfer.png)
+
 ### Step 8: Hash-Based Tracking of Final ZIP File
 ```kql
 DeviceFileEvents
@@ -92,6 +105,8 @@ DeviceFileEvents
 | order by Timestamp desc
 ```
 ➡️ Detected file rename on original user's machine — smoking gun.
+
+![Final File Rename to marketing_misc.zip](screenshots/final_file_rename_to_marketing_misc.png)
 
 ### Step 9: Confirmed Final Filename Change
 ```kql
@@ -131,3 +146,4 @@ DeviceFileEvents
 
 ## ✅ Outcome
 This investigation led to a full reconstruction of the attacker’s path, exposing the insider’s complete method of access, obfuscation, and exfiltration of sensitive data. All key artifacts were captured and documented to support remediation and prevention in future incidents.
+
