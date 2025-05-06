@@ -1,11 +1,11 @@
-# 🕵️‍♂️ Threat Hunting Case Study: Insider Data Exfiltration via Steganography
+# Threat Hunting Case Study: Insider Data Exfiltration via Steganography
 
-## 📌 Overview
+## Overview
 In this case study, I conducted a full behavioral threat hunt using Microsoft Defender for Endpoint and KQL to identify and investigate a simulated insider threat. The actor (user: `bmontgomery`) accessed sensitive documents, embedded them into BMP images using `steghide.exe`, and compressed them into a ZIP archive for exfiltration. The hunt exposed the entire attack chain, from initial access to final exfiltration.
 
 ---
 
-## 🎯 Objective
+## Objective
 - Identify unauthorized document access
 - Detect data obfuscation via steganography
 - Uncover data compression and exfiltration methods
@@ -13,7 +13,7 @@ In this case study, I conducted a full behavioral threat hunt using Microsoft De
 
 ---
 
-## 🧠 Investigation Timeline & KQL Queries
+## Investigation Timeline & KQL Queries
 
 ### Step 1: Identify Accessed Corporate Documents
 ```kql
@@ -118,7 +118,7 @@ DeviceFileEvents
 
 ---
 
-## 🔐 Artifacts & Evidence
+## Artifacts & Evidence
 - SHA256 hashes of involved documents and final archive
 - Process command lines showing use of `steghide.exe` and `7z.exe`
 - File rename events and movement across machines
@@ -126,7 +126,7 @@ DeviceFileEvents
 
 ---
 
-## 📚 Lessons Learned
+## Lessons Learned
 - Behavioral-based threat hunting provides valuable insight into stealthy insider activity
 - Hash tracking remains a powerful pivot point across devices and filenames
 - Obfuscation via steganography is a legitimate tactic in real-world data exfiltration
@@ -134,7 +134,7 @@ DeviceFileEvents
 
 ---
 
-## 🛠️ Tools & Skills Demonstrated
+## Tools & Skills Demonstrated
 - Microsoft Defender for Endpoint
 - KQL (Kusto Query Language)
 - Threat hunting methodology
